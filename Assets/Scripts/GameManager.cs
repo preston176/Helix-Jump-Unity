@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
-
+using Unity.Services.Core;
+using Unity.Services.Authentication;
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager singleton;
     public int best;
     public int score;
     public int currentStage = 0;
 
 
-    private void Awake()
+    private async void Awake()
     {
         if (singleton == null)
             singleton = this;
@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
         // Load the saved highscore
         best = PlayerPrefs.GetInt("Highscore");
+        await UnityServices.InitializeAsync();
+        await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
     }
 
