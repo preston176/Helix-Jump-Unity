@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<BallController>().ResetBall();
         FindObjectOfType<HelixController>().LoadStage(currentStage);
     }
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
 
     public void NextLevel()
     {
@@ -49,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Restarting Level");
         // load the gameover scene
-        SceneManager.LoadScene("GameOver");
+        // SceneManager.LoadScene("GameOver");
         // Show Adds Advertisement.Show();
         singleton.score = 0;
         FindObjectOfType<BallController>().ResetBall();
