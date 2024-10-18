@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -21,11 +22,20 @@ public class GameManager : MonoBehaviour
 
         // Load the saved highscore
         best = PlayerPrefs.GetInt("Highscore");
-        // Load the Main Menu scene initially
-        if (SceneManager.GetActiveScene().name != "Menu") // Check if we're not already in the Main Menu
-        {
-            SceneManager.LoadScene("Menu");
-        }
+
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Menu");
+
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Main");
+        FindObjectOfType<BallController>().ResetBall();
+        FindObjectOfType<HelixController>().LoadStage(currentStage);
     }
 
     public void NextLevel()
@@ -38,6 +48,8 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         Debug.Log("Restarting Level");
+        // load the gameover scene
+        SceneManager.LoadScene("GameOver");
         // Show Adds Advertisement.Show();
         singleton.score = 0;
         FindObjectOfType<BallController>().ResetBall();
