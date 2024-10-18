@@ -55,8 +55,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Restarting Level");
         // load the gameover scene
-        // SceneManager.LoadScene("GameOver");
-        // Show Adds Advertisement.Show();
+        // Advertisement.Show();
         singleton.score = 0;
         FindObjectOfType<BallController>().ResetBall();
         FindObjectOfType<HelixController>().LoadStage(currentStage);
